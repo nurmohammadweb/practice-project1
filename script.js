@@ -7,7 +7,7 @@ const loadLessons = () => {
 const removeActive = () => {
   const lessonButtons = document.querySelectorAll(".lesson-btn")
   lessonButtons.forEach((btn) => btn.classList.remove("active"));
-}
+};
 
 const loadLevelWord = (id) => {
   const url =`https://openapi.programming-hero.com/api/level/${id}`;
@@ -20,6 +20,7 @@ const loadLevelWord = (id) => {
       cartBtn.classList.add('active');
       displayLevelWord(data.data);
     });
+  
 };
 
 const displayLevelWord = (words) => {
@@ -67,7 +68,7 @@ const displayLesson = (lessons) => {
     // 3. create Element
     const btnDiv = document.createElement("div")
     btnDiv.innerHTML = `
-    <button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary"><i class="fa-solid fa-book-open-reader"></i>
+    <button id="lesson-btn-${lesson.level_no}" onclick="loadLevelWord(${lesson.level_no})" class="btn btn-outline btn-primary lesson-btn"><i class="fa-solid fa-book-open-reader"></i>
               Lesson - ${lesson.level_no}
     </button>`;
     // 4.append into container
