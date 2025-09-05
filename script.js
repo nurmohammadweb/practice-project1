@@ -23,6 +23,38 @@ const loadLevelWord = (id) => {
   
 };
 
+ const loadWordDetail = async(id) => {
+    const url = `https://openapi.programming-hero.com/api/word/${id}`;
+   
+   const res = await fetch(url);
+   const details = await res.json();
+   displayWordDeteals(details.data);
+} 
+
+const displayWordDeteals = (word) => {
+  console.log(word);
+  const detailsBox = document.getElementById("details-container");
+   detailsBox.innerHTML = `<div class="">
+            <h2 class="text-2xl font-bold">${word.word}(<i class="fa-solid fa-microphone"></i>:${word.pronuonciation})</h2>
+          </div>
+          <div class="">
+            <h2 class="font-bold">Meaning</h2>
+            <p class="">${word.meaning}</p>
+          </div>
+          <div class="">
+            <h2 class="font-bold">Example</h2>
+            <p class="">${word.sentence}</p>
+          </div>
+          <div class="">
+            <h2 class="font-bold">Synonym</h2>
+            <span class="btn">Syn1</span>
+            <span class="btn">Syn1</span>
+            <span class="btn">Syn1</span>
+          </div>
+`;
+  document.getElementById("word_modal").showModal();
+};
+
 const displayLevelWord = (words) => {
   const wordContainer = document.getElementById("Word-container");
   //  console.log(words);
@@ -39,6 +71,8 @@ const displayLevelWord = (words) => {
     return;
   }
 
+ 
+
   wordContainer.innerHTML = "";
   words.forEach((word) => {
     const clickDiv = document.createElement("div");
@@ -47,8 +81,8 @@ const displayLevelWord = (words) => {
         <p class="font-semibold ">Meaning / Pronuonciation</p>
         <div class="text-2xl font-medium font-bangla"> ${word.meaning ? word.meaning : "meaning পাওয়া যায় নি"} / ${word.pronuonciation ? word.pronuonciation : "pronuonciation পাওয়া যায় নি"}</div>
         <div class="flex justify-between items-center">
-          <button onclick="my_modal_5.showModal()" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
-          <button  onclick="my_modal_5.showModal()" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
+          <button onclick="loadWordDetail(${word.id})" class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-circle-info"></i></button>
+          <button class="btn bg-[#1A91FF10] hover:bg-[#1A91FF80]"><i class="fa-solid fa-volume-high"></i></button>
         </div>
       </div>`;
 
